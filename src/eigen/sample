@@ -1,0 +1,16 @@
+//			ImageFolderProcessor imageProcessor = new ImageFolderProcessor("/home/deansmiller/Documents/test1/");
+//			imageProcessor.process(new ImageOperation(){
+//
+//				@Override
+//				public BufferedImage execute(File imageFile) {
+//					try {
+//						BufferedImage image = ImageUtils.getBufferedImage(imageFile);
+//						image = ImageUtils.scaleImage(image, 320, 240);
+//						ImageUtils.saveImage(image, "/home/deansmiller/Documents/test1/" + imageFile.getName());
+//					} catch (IOException e) {
+//						e.printStackTrace();
+//					}
+//					return null;
+//				}
+//				
+//			});

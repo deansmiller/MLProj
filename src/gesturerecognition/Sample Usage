@@ -1,0 +1,53 @@
+					Network skinNN = Network.createNetworkFromFile("/home/deansmiller/Dropbox/Jarvis/src/real_skin_nn.data");
+            BufferedImage image = ImageUtils.getBufferedImage("/home/deansmiller/Pictures/Jarvis Test Cases/hand.jpg");
+            NNSkinFilter skin = new NNSkinFilter(skinNN, 0.9999, image.getWidth(), image.getHeight());
+            image = skin.filterSkinPixels(image);
+		
+		
+			// CREATE DATA SAMPLES
+			Network skinNN = Network.createNetworkFromFile("/home/deansmiller/Dropbox/Jarvis/src/real_skin_nn.data");
+			NNSkinFilter skin = new NNSkinFilter(skinNN, 0.999, 24, 24);
+
+			File data = new File("/home/deansmiller/Pictures/Jarvis Test Cases/Hands/Set1/0003/0000");
+			List<File> files = Arrays.asList(data.listFiles());
+			BufferedImage image;
+			int i = 0;
+			for(File f : files){
+				System.out.println("Filtering " + f.getPath());
+				image = skin.filterSkinPixels(ImageUtils.getBufferedImage(f));
+				ImageUtils.saveImage(image, "/home/deansmiller/Pictures/Jarvis Test Cases/Hands/Gesture Samples/Filtered Stop Hand/stop_hand_" + i++ + ".jpg");
+			}
+		    System.out.println("Completed..");
+		    
+		    
+				    Webcam webcam = Webcam.getDefault();
+		    webcam.open();
+		    BufferedImage image = webcam.getImage();
+		    ImageIO.write(image, "jpg", new File("test.jpg"));
+		    
+		    
+		    			Network skinNN = Network.createNetworkFromFile("/home/deansmiller/Dropbox/Jarvis/src/SKIN.data");
+            BufferedImage image0 = ImageUtils.getBufferedImage("/home/deansmiller/Dropbox/sample faces/group.jpg");
+            BufferedImage image = ImageUtils.getBufferedImage("/home/deansmiller/Dropbox/sample faces/group.jpg");
+            NNSkinFilter skin = new NNSkinFilter(skinNN, 0.92, image.getWidth(), image.getHeight());
+            System.out.println("Filtering..");
+			image = skin.filterSkinPixels(image);
+            System.out.println("Localising..");
+            SkinLocalizer boxer = new SkinLocalizer(image.getWidth(), image.getHeight());
+            boxer.setParameters(5, 20);
+            Set<Region> regions = boxer.localize(image);
+
+            System.out.println("Drawing regions..");
+            Iterator iter = regions.iterator();
+            Graphics graph = image0.getGraphics();
+            graph.setColor(Color.red);
+            while(iter.hasNext()){
+                Region region = (Region) iter.next();
+                graph.drawRect(region.x, region.y, region.width, region.height);
+            }
+            System.out.println("Drawing image");
+			ImageUtils.saveImage(image0, "/home/deansmiller/Desktop/test.jpg");
+		    System.out.println("Completed..");
+		    
+		    
+		
