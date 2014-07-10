@@ -16,7 +16,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		try {
-			BufferedImage image = ImageUtils.getBufferedImage("/home/deansmiller/Pictures/Webcam/all.jpg");
+			BufferedImage image = ImageUtils.getBufferedImage("/home/deansmiller/Pictures/2-fingers.jpg");
 			
 			List<Network> networks = new ArrayList<Network>();
 			networks.add(Network.createNetworkFromFile("resources/skin_classifier1.nn"));
@@ -28,15 +28,15 @@ public class Main {
 			Graphics g = image.getGraphics();
 			g.setColor(Color.RED);
 			for(DropLine point : points){
-				g.fillOval(point.x.intValue(), point.y.intValue(), 20, 20);
+				g.fillOval(point.x.intValue(), point.y.intValue(), 10, 10);
 			}
-			Font f = new Font("Dialog", Font.PLAIN, 20);
-			g.setFont(f);
-			
-			g.drawString("Fingers: " + points.size(), 5, 40);
-			System.out.println("Fingers: " + points.size());
+//			Font f = new Font("Dialog", Font.PLAIN, 20);
+//			g.setFont(f);
+//			
+//			g.drawString("Fingers: " + points.size(), 5, 40);
+//			System.out.println("Fingers: " + points.size());
 			g.dispose();
-			ImageUtils.saveImage(image, "/home/deansmiller/Pictures/Webcam/all_f.jpg");
+			ImageUtils.saveImage(image, "/home/deansmiller/Pictures/output.jpg");
 			
 		} catch (Exception e) {
 			e.printStackTrace();

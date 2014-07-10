@@ -10,6 +10,7 @@ import java.awt.image.BufferedImageOp;
 import java.awt.image.ColorConvertOp;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 
@@ -86,6 +87,11 @@ public class ImageUtils {
 	
 	public static BufferedImage getBufferedImage(String path) throws IOException{
 		Image image = ImageIO.read(new File(path));
+		return (BufferedImage) image;	
+	}
+	
+	public static BufferedImage getBufferedImage(URL url) throws IOException {
+		Image image = ImageIO.read(url);
 		return (BufferedImage) image;	
 	}
 	

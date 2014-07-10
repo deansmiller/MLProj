@@ -19,7 +19,7 @@ import java.util.Collections;
 public class FingerCounter {
 	
 	private int SCAN_WIDTH = 20;
-	private double THRESHOLD = 1.20; // 20%
+	private double THRESHOLD = 1.05; // 5%
 	private ArrayList<Integer> drops;
 	private ArrayList<DropLine> lines;
 	private Double averageDrop = 0.0;
@@ -35,6 +35,10 @@ public class FingerCounter {
 	public FingerCounter(){
 		drops = new ArrayList<>();
 		lines = new ArrayList<>();		
+	}
+	
+	public void setThreshold(double t){
+		THRESHOLD = 1 + t;
 	}
 	
 	public ArrayList<DropLine> countFingers(BufferedImage image){
@@ -149,7 +153,7 @@ public class FingerCounter {
 		// lowest drops, must be finger tips
 		for(int i = 0; i < lines.size(); i++){
 			double mag = lines.get(i).y;
-			if(mag * THRESHOLD < averageDrop) fingerTips.add(lines.get(i));
+			if(mag < averageDrop) fingerTips.add(lines.get(i));
 		}
 
 		fingerTips = removeExtraDropLines(fingerTips);
