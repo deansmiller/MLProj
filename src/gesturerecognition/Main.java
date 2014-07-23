@@ -16,7 +16,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		try {
-			BufferedImage image = ImageUtils.getBufferedImage("/home/deansmiller/Pictures/2-fingers.jpg");
+			BufferedImage image = ImageUtils.getBufferedImage("/home/deansmiller/Pictures/3-fingers.jpg");
 			
 			List<Network> networks = new ArrayList<Network>();
 			networks.add(Network.createNetworkFromFile("resources/skin_classifier1.nn"));
