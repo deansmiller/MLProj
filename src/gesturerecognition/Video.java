@@ -1,15 +1,11 @@
 package gesturerecognition;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-
+import java.util.Iterator;
+import java.util.Set;
 import javax.swing.JFrame;
-
 import utils.ImageUtils;
-import nn.Network;
-
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamImageTransformer;
 
@@ -19,28 +15,35 @@ public class Video extends JFrame implements Runnable {
 	private static final int INTERVAL = 100;
 	private Webcam webcam = Webcam.getDefault();
 	private final int WIDTH = 320;
-	private final int HEIGHT = 240, TIME = 5;
-	private int i = 0;
-
+	private final int HEIGHT = 240;
 	
 	private class ImageFilterer implements WebcamImageTransformer {
-		private NNSkinFilter filter;
-		private FingerCounter counter;
-		private SkinLocalizer boxer;
+		private BlobDetector boxer;
+        private ColourFilter colourFilter;
+        private Set<Region> regions;
+        private Iterator<Region> iterator;
 
-		public ImageFilterer(NNSkinFilter filter) {
-			this.filter = filter;
+		public ImageFilterer() {
+            boxer = new BlobDetector(WIDTH, HEIGHT);
+            colourFilter = new ColourFilter(Color.BLUE, 0.7);
 		}
 
 		@Override
 		public BufferedImage transform(BufferedImage image) {
+            BufferedImage original = ImageUtils.copyImage(image);
 			try {
-				image = ImageUtils.filterSkin(image);
-				//image = counter.count(image);
+
+                image = colourFilter.filter(image);
+                regions = boxer.localize(image);
+                Graphics2D g2 = original.createGraphics();
+                g2.setColor(Color.GREEN);
+                iterator = regions.iterator();
+                while(iterator.hasNext()) g2.draw(iterator.next());
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			return image;
+			return original;
 		}
 	}
 
@@ -49,14 +52,11 @@ public class Video extends JFrame implements Runnable {
 		Thread updater = new Thread(this, "updater-thread");
 		updater.setDaemon(true);
 		updater.start();
-		setTitle("Jarvis");
+		setTitle("Colour Detection");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
 		webcam.setViewSize(new Dimension(WIDTH, HEIGHT));
-		
-		ArrayList<Network> networks = new ArrayList<Network>();
-		networks.add(Network.createNetworkFromFile("resources/skin_classifier2.nn"));
-		webcam.setImageTransformer(new ImageFilterer(new NNSkinFilter(networks, 0.99)));
+		webcam.setImageTransformer(new ImageFilterer());
 		webcam.open();
 		VideoPanel panel = new VideoPanel(webcam);
 		add(panel);

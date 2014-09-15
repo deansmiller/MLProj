@@ -1,13 +1,5 @@
 package pcaknn;
 
-import gesturerecognition.NNSkinFilter;
-import gesturerecognition.SkinLocalizer;
-
-import java.awt.image.BufferedImage;
-
-import nn.Network;
-import utils.ImageUtils;
-
 
 public class Main {
 
@@ -18,7 +10,7 @@ public class Main {
 //			test = ImageUtils.scaleImage(test, 24, 24);
 //			Network skinNN = Network.createNetworkFromFile("/home/deansmiller/Dropbox/Jarvis/src/real_skin_nn.data");
 //			NNSkinFilter skin = new NNSkinFilter(skinNN, 0.9999, 24, 24);
-//			SkinLocalizer loc = new SkinLocalizer(24, 24);
+//			BlobDetector loc = new BlobDetector(24, 24);
 //			test = loc.localize(test);
 //			test = skin.filterSkinPixels(test);
 //			ImageUtils.saveImage(test, "/home/deansmiller/Pictures/test.jpg");

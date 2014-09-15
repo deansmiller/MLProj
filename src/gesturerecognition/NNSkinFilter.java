@@ -34,12 +34,12 @@ public class NNSkinFilter {
 				boolean isSkin = true;
 				for(Network n : nns){
 					n.applyInput(input);
-					if(n.getOutput()[0] > threshold) isSkin = false;
+					if(n.getOutput()[0] > threshold) isSkin = true;
 				}
 				
 				if(isSkin){
-					output.setRGB(w, h, Color.BLACK.getRGB());
-				} else output.setRGB(w, h, Color.WHITE.getRGB());	
+					output.setRGB(w, h, Color.WHITE.getRGB());
+				} else output.setRGB(w, h, Color.BLACK.getRGB());
 
 			}
 		}

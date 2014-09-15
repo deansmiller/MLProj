@@ -17,6 +17,18 @@ import javax.imageio.ImageIO;
 import Jama.Matrix;
 
 public class ImageUtils {
+
+    public static BufferedImage denoise(BufferedImage image){
+        BufferedImage output = new BufferedImage(image.getWidth(), image.getHeight(), image.getType());
+        int r, g, b;
+
+        for(int w = 0; w < image.getWidth(); w++){
+            for(int h = 0; h < image.getHeight(); h++){
+
+            }
+        }
+        return output;
+    }
 	
 	public static BufferedImage filterSkin(BufferedImage image){
 		BufferedImage output = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);

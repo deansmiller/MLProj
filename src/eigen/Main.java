@@ -86,7 +86,7 @@ public class Main {
 //			System.out.println("Filtering skin pixels..");
 //			NNSkinFilter skin = new NNSkinFilter(skinNN, 0.8, scaledWidth, scaledHeight);
 //			BufferedImage image = skin.filterSkinPixels(original);		
-//			SkinLocalizer locale = new SkinLocalizer(scaledWidth, scaledHeight);
+//			BlobDetector locale = new BlobDetector(scaledWidth, scaledHeight);
 //			locale.setParameters(5, 22);
 //			System.out.println("Localizing..");
 //			Set<Region> regions = locale.localize(image);

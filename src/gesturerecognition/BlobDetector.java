@@ -14,7 +14,7 @@ import utils.ImageUtils;
 
 
 //For localising skin for hand detection and classification for NN
-public class SkinLocalizer {
+public class BlobDetector {
 	
 	private ArrayList<Region> rectangles = new ArrayList<Region>();
 	private ArrayList<Region> whiteRects = new ArrayList<Region>();
@@ -27,7 +27,7 @@ public class SkinLocalizer {
 	private int THRESHOLD = 20; //how many white pixels per window
 	
 	
-	public SkinLocalizer(int scaledWidth, int scaledHeight){
+	public BlobDetector(int scaledWidth, int scaledHeight){
 		this.scaledWidth = scaledWidth;
 		this.scaledHeight = scaledHeight;
 	}
@@ -175,11 +175,15 @@ public class SkinLocalizer {
 
 		// only need to remember the rectangles that have a certain amount of white points
 		for(Region r : whiteRects){
-			//System.out.println(r.pointCount);
-
 			if(r.pointCount >= THRESHOLD){
 				thresholdedRegions.add(r);
-			}
+			} else { // TODO does this work????
+                for(int x = 0; x < r.width; x++){
+                    for(int y = 0; y < r.height; y++){
+                        image.setRGB(x, y, Color.BLACK.getRGB());
+                    }
+                }
+            }
 		}
 
 		BufferedImage transformed = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_RGB);
@@ -205,6 +209,5 @@ public class SkinLocalizer {
 		return transformed;
 
 	}
-	
 
 }
