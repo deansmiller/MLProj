@@ -30,7 +30,6 @@ public class Video extends JFrame implements Runnable {
 
 		public ImageFilterer(NNSkinFilter filter) {
 			this.filter = filter;
-			counter = new FingerCounter(5, 1.20);
 		}
 
 		@Override
