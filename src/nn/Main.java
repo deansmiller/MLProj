@@ -11,7 +11,6 @@ public class Main {
 
 		try {		
 
-			System.out.println("");
 			PatternReader train = new PatternReader("resources/real_skin_data.csv"); 
 			ArrayList<Pattern> trainingSet = new ArrayList<Pattern>();
 			trainingSet.addAll(train.read());

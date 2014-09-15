@@ -37,7 +37,7 @@ public class Video extends JFrame implements Runnable {
 		public BufferedImage transform(BufferedImage image) {
 			try {
 				image = ImageUtils.filterSkin(image);
-				image = counter.count(image);
+				//image = counter.count(image);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
