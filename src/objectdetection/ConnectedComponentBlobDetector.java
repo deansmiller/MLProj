@@ -12,6 +12,8 @@ import java.util.ArrayList;
 public class ConnectedComponentBlobDetector {
 
     private ArrayList labels = new ArrayList();
+    private ArrayList<Region> regions = new ArrayList();
+    private int counter = 0;
 
     public ConnectedComponentBlobDetector(){
 
@@ -19,36 +21,38 @@ public class ConnectedComponentBlobDetector {
 
     public BufferedImage detect(BufferedImage image){
         BufferedImage output = new BufferedImage(image.getWidth(), image.getHeight(), image.getType());
-        int total = image.getHeight() * image.getWidth();
-        System.out.println("Total: " + total);
-        int count = 1;
-        double perc;
+
         for(int w = 1; w < image.getWidth() - 1; w++){
             for(int h = 1; h < image.getHeight() - 1; h++){
-                perc = (total / count++) * 100;
-                System.out.println(perc);
+
                 checkPixelNeighbours(image, w, h);
             }
         }
-        System.out.println(labels);
+        long count = regions.stream().filter(region -> region.x == 0 && region.y == 0 && region.width == 0 && region.height == 0).count();
+        System.out.println(count);
         return output;
     }
 
     private void checkPixelNeighbours(BufferedImage image, int x, int y){
-        if(image.getRGB(x - 1, y) == Color.WHITE.getRGB()){
-            checkPixelNeighbours(image, x - 1, y);
-        }
-        if(image.getRGB(x + 1, y) == Color.WHITE.getRGB()){
-            checkPixelNeighbours(image, x - 1, y);
-        }
-        if(image.getRGB(x, y - 1) == Color.WHITE.getRGB()){
-            checkPixelNeighbours(image, x - 1, y);
-        }
-        if(image.getRGB(x, y + 1) == Color.WHITE.getRGB()){
-            checkPixelNeighbours(image, x - 1, y);
-        }
+        Region region = new Region();
+        if(!(image.getRGB(x + 1, y) == Color.WHITE.getRGB() && image.getRGB(x, y - 1) == Color.WHITE.getRGB())){
+            counter++;
 
-        labels.add(labels.size() + 1);
+        } else if(image.getRGB(x + 1, y) == Color.WHITE.getRGB() && image.getRGB(x, y - 1) == Color.WHITE.getRGB()){
+            region.add(x, y - 1);
+            region.add(x + 1, y);
+        } else {
+
+            if(image.getRGB(x + 1, y) == Color.WHITE.getRGB()){
+                region.add(x + 1, y);
+            }
+            if(image.getRGB(x, y - 1) == Color.WHITE.getRGB()){
+                region.add(x, y - 1);
+            }
+        }
+       regions.add(region);
+
+
     }
 
 

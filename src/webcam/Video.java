@@ -30,7 +30,7 @@ public class Video extends JFrame implements Runnable {
 
 		public ImageFilterer() {
             boxer = new BlobDetector(WIDTH, HEIGHT);
-            colourFilter = new ColourFilter(Color.RED, 0.7);
+            colourFilter = new ColourFilter(Color.BLUE, 0.7);
             try {
                 robot = new Robot();
             } catch (AWTException e) {
