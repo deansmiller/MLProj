@@ -1,10 +1,14 @@
-package gesturerecognition;
+package webcam;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Iterator;
 import java.util.Set;
 import javax.swing.JFrame;
+
+import objectdetection.BlobDetector;
+import objectdetection.ColourFilter;
+import objectdetection.Region;
 import utils.ImageUtils;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamImageTransformer;
@@ -22,11 +26,17 @@ public class Video extends JFrame implements Runnable {
         private ColourFilter colourFilter;
         private Set<Region> regions;
         private Iterator<Region> iterator;
+        private Robot robot;
 
 		public ImageFilterer() {
             boxer = new BlobDetector(WIDTH, HEIGHT);
-            colourFilter = new ColourFilter(Color.BLUE, 0.7);
-		}
+            colourFilter = new ColourFilter(Color.RED, 0.7);
+            try {
+                robot = new Robot();
+            } catch (AWTException e) {
+                e.printStackTrace();
+            }
+        }
 
 		@Override
 		public BufferedImage transform(BufferedImage image) {
@@ -38,7 +48,13 @@ public class Video extends JFrame implements Runnable {
                 Graphics2D g2 = original.createGraphics();
                 g2.setColor(Color.GREEN);
                 iterator = regions.iterator();
-                while(iterator.hasNext()) g2.draw(iterator.next());
+                while(iterator.hasNext()) {
+                    Region region = iterator.next();
+                    g2.draw(region);
+                    //robot.mouseMove(region.x, region.y);
+                }
+
+
 
 			} catch (Exception e) {
 				e.printStackTrace();

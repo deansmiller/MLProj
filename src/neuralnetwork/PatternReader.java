@@ -1,4 +1,4 @@
-package nn;
+package neuralnetwork;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

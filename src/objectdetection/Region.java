@@ -1,4 +1,4 @@
-package gesturerecognition;
+package objectdetection;
 
 import java.awt.Rectangle;
 import java.util.HashMap;

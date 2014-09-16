@@ -1,9 +1,9 @@
-package gesturerecognition;
+package webcam;
 
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 
-import nn.Network;
+import neuralnetwork.Network;
 import pcaknn.Data;
 import pcaknn.PCA;
 

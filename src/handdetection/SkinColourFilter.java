@@ -1,4 +1,4 @@
-package gesturerecognition;
+package handdetection;
 
 import utils.ArrayUtils;
 

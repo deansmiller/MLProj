@@ -1,4 +1,4 @@
-package nn;
+package neuralnetwork;
 
 import java.awt.Toolkit;
 import java.io.File;

@@ -1,11 +1,10 @@
-package gesturerecognition;
+package handdetection;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Collections;
 
 /*
  *  Assumptions: The image is of a hand and the hand is Color.WHITE

@@ -1,11 +1,11 @@
-package gesturerecognition;
+package objectdetection;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 public class ColourFilter {
 	
-	private float[] hsb, selectedHsb;
+	private float[] selectedHsb;
 	private double threshold;
 	private int BLACK = Color.BLACK.getRGB();
 	private int WHITE = Color.WHITE.getRGB();
@@ -29,8 +29,9 @@ public class ColourFilter {
 			for(int j = 0; j < height; j++){
 				colour = new Color(image.getRGB(i, j));
                 hsb = toHSB(colour);
-                //System.out.println((euclideanDistance(hsb)));
+                //System.out.println(hsb[0] + "," + "," + hsb[1] + "," + hsb[2]);
                 if(euclideanDistance(hsb) < threshold){
+
 					filtered.setRGB(i, j, WHITE);
 				} else filtered.setRGB(i, j, BLACK);
 			}
@@ -41,10 +42,7 @@ public class ColourFilter {
 	private float[] toHSB(Color colour){
 		return Color.RGBtoHSB(colour.getRed(), colour.getGreen(), colour.getBlue(), null);
 	}
-	
-	private float[] toHSB(int pixel){
-		return Color.RGBtoHSB((pixel>>16)&0xff, (pixel>>8)&0xff, pixel&0xff, null);
-	}
+
 	
 	private double euclideanDistance(float[] pixelHSB){
 		double sum = 0;

@@ -1,11 +1,10 @@
-package gesturerecognition;
+package handdetection;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.List;
 
-import nn.Network;
+import neuralnetwork.Network;
 
 public class NNSkinFilter {
 	

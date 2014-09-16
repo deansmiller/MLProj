@@ -1,6 +1,6 @@
-package gesturerecognition;
+package objectdetection;
 
-public class Pattern extends nn.Pattern{
+public class Pattern extends neuralnetwork.Pattern{
 
 	public Pattern(double[] input, double[] output) {
 		super(input, output);

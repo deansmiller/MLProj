@@ -1,4 +1,4 @@
-package nn;
+package neuralnetwork;
 
 import java.util.ArrayList;
 import java.util.Collections;
