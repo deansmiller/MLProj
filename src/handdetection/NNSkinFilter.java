@@ -8,15 +8,15 @@ import neuralnetwork.Network;
 
 public class NNSkinFilter {
 	
-	private List<Network> nns;
+	private Network nn;
 	private final int RED = 0, GREEN = 1, BLUE = 2, RGB = 3;
 	private double threshold;
 	private Color tmpColor;
 	private double[] input = new double[RGB];
 
 	
-	public NNSkinFilter(List<Network> nns, double threshold) throws Exception {
-		this.nns = nns;
+	public NNSkinFilter(Network nn, double threshold) throws Exception {
+		this.nn = nn;
 		this.threshold = threshold;
 	}
 	
@@ -30,13 +30,8 @@ public class NNSkinFilter {
 				input[RED] = tmpColor.getRed();
 				input[GREEN] = tmpColor.getGreen();
 				input[BLUE] = tmpColor.getBlue();
-				boolean isSkin = true;
-				for(Network n : nns){
-					n.applyInput(input);
-					if(n.getOutput()[0] > threshold) isSkin = true;
-				}
-				
-				if(isSkin){
+                nn.applyInput(input);
+				if(nn.getOutput()[0] > threshold){
 					output.setRGB(w, h, Color.WHITE.getRGB());
 				} else output.setRGB(w, h, Color.BLACK.getRGB());
 
