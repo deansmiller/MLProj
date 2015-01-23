@@ -30,6 +30,12 @@ public class FingerCounter {
 		drops = new ArrayList<>();
 		lines = new ArrayList<>();		
 	}
+
+    public FingerCounter(int scanWidth){
+        SCAN_WIDTH = scanWidth;
+        drops = new ArrayList<>();
+        lines = new ArrayList<>();
+    }
 	
 	public FingerCounter(){
 		drops = new ArrayList<>();
